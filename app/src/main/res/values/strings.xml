@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Speed Tracker</string>
+    <string name="title_activity_maps">Speed Tracker</string>
+    <string name="cur_loc_btn">Locate</string>
+    <string name="button1">+</string>
+    <string name="button2">-</string>
+    <string name="speed">Speed = __km/h\nMaxspeed = 20km/h\nDistance = __m</string>
+    <string name="speedValue">Speed</string>
+    <string name="log_out">Log Out</string>
+    <string name="welcome_to_speedtracker">Welcome to SpeedTracker</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Log In</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t have an account. Sign up here.</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account_sign_in_here">Already have an account. Sign in here.</string>
+    <string name="todo">TODO</string>
+    <string name="delete">Delete</string>
+    <string name="lat">Lat =</string>
+    <string name="lon">Lon =</string>
+    <string name="add">Add</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="repeat_password">Repeat Password</string>
+</resources>

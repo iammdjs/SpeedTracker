@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "455679248239",
+    "firebase_url": "https://speed-tracker-a5ac3.firebaseio.com",
+    "project_id": "speed-tracker-a5ac3",
+    "storage_bucket": "speed-tracker-a5ac3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455679248239:android:b2131cf861e1fbe5920a9a",
+        "android_client_info": {
+          "package_name": "com.example.speedtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455679248239-5s9iovf9k0sovgi2o8eekc2dpib9ki50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.speedtracker",
+            "certificate_hash": "f9165c4ef6723970fefc06626c87eb7cde8396bc"
+          }
+        },
+        {
+          "client_id": "455679248239-8irjn28v6jpkhg6v8ar9pk02qdludn96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.speedtracker",
+            "certificate_hash": "e95e2286bdd7a921421330030670b61c5985c987"
+          }
+        },
+        {
+          "client_id": "455679248239-992unomrha0d8rv07ig7chns12dfitvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUxCXYN5DhryJpxRTky_RAR3MxFRXCEQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455679248239-992unomrha0d8rv07ig7chns12dfitvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

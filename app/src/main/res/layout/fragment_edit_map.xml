@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditMapFragment">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <ImageView
+        android:id="@+id/cur_loc_btn"
+        android:layout_width="91dp"
+        android:layout_height="63dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.703"
+        app:srcCompat="@drawable/my_location" />
+
+    <ImageView
+        android:id="@+id/zoomIn"
+        android:layout_width="91dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/todo"
+        android:text="@string/button1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cur_loc_btn"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/zoom_in" />
+
+    <ImageView
+        android:id="@+id/zoomOut"
+        android:layout_width="91dp"
+        android:layout_height="63dp"
+        android:contentDescription="@string/todo"
+        android:text="@string/button2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cur_loc_btn"
+        app:layout_constraintVertical_bias="0.651"
+        app:srcCompat="@drawable/zoom_out" />
+
+    <TextView
+        android:id="@+id/curSpeed"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/color1"
+        android:padding="5dp"
+        android:text="@string/speed"
+        android:textColor="@color/color3"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <Button
+        android:id="@+id/deletePoint"
+        android:layout_width="94dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/color4"
+        android:text="@string/delete"
+        android:textColor="@color/color2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/latTextView"
+        android:layout_width="212dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/color1"
+        android:padding="3dp"
+        android:text="@string/lat"
+        android:textColor="@color/color3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lonTextView"
+        android:layout_width="212dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/color1"
+        android:padding="3dp"
+        android:text="@string/lon"
+        android:textColor="@color/color3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latTextView" />
+
+    <Button
+        android:id="@+id/load"
+        android:layout_width="95dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/color4"
+        android:text="@string/add"
+        android:textColor="@color/color2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deletePoint"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/speedValue"
+        android:layout_width="212dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/color1"
+        android:ems="10"
+        android:hint="@string/speedValue"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        android:padding="10dp"
+        android:textColor="@color/color3"
+        android:textColorHint="@color/color3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lonTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
