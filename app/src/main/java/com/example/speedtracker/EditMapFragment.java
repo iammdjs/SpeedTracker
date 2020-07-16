@@ -190,8 +190,8 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                     String[] stringLongitudeParts = String.valueOf(uploadLatLng.longitude).split("\\.",2);
                     String path1 = stringLatitudeParts[0] + "_" + stringLongitudeParts[0];
                     String path2 = stringLatitudeParts[1].substring(0,2) + "_" + stringLongitudeParts[1].substring(0,2);
-                    final String field = stringLatitudeParts[0] + "." + stringLatitudeParts[1] + ","
-                            + stringLongitudeParts[0] + "." + stringLongitudeParts[1];
+
+                    final String field = uploadLatLng.latitude + "," + uploadLatLng.longitude;
 
                     DocumentReference documentReference = mStore.collection("points")
                             .document(path1).collection("sub_points").document(path2);
@@ -207,7 +207,6 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                             Log.d("myTag", "Delte field = " + field);
 
                             deletePoint.setVisibility(View.INVISIBLE);
-//                            editTextSpeed.setText("");
                             addDataBtn.setText("Add");
 
                             pointArray.remove(field);
@@ -234,8 +233,7 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                     String[] stringLongitudeParts = String.valueOf(uploadLatLng.longitude).split("\\.",2);
                     String path1 = stringLatitudeParts[0] + "_" + stringLongitudeParts[0];
                     String path2 = stringLatitudeParts[1].substring(0,2) + "_" + stringLongitudeParts[1].substring(0,2);
-                    final String field = stringLatitudeParts[0] + "." + stringLatitudeParts[1] + ","
-                                            + stringLongitudeParts[0] + "." + stringLongitudeParts[1];
+                    final String field = uploadLatLng.latitude + "," + uploadLatLng.longitude;
                     speedValue = editTextSpeed.getText().toString();
                     if(!"".equals(speedValue)){
                         sValue = Integer.parseInt(speedValue);
@@ -323,7 +321,7 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                     lat2 = location.getLatitude();
                     lon2 = location.getLongitude();
                     r = 6371000;
-                    double d;
+                    double distance;
 
                     // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
 
@@ -359,11 +357,11 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                             String[] keys = key.split(",",2);
                             lat1 = Double.parseDouble(keys[0]);
                             lon1 = Double.parseDouble(keys[1]);
-                            d = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
+                            distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
                                     +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
-                            if (d <= nearDistance){
-                                nearDistance = d;
+                            if (distance <= nearDistance){
+                                nearDistance = distance;
                                 maxSpeed = Integer.parseInt(String.valueOf(speed));
 
                                 String nDistance = String.format("%.2f",nearDistance);
@@ -396,53 +394,54 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                                         Object speed;
                                         double nearDistance = 2000.0;
                                         int maxSpeed = 20;
-                                        if(circleList != null){
+                                        if(circleList != null) {
                                             for (Circle circle : circleList.values()) {
                                                 circle.remove();
                                             }
                                             circleList.clear();
+                                        }
 
+                                        pointArray = null;
+                                        pointArray = document.getData();
+                                        assert pointArray != null;
+                                        for (Map.Entry<String,Object> entry : pointArray.entrySet()){
+                                            key = entry.getKey();
+                                            speed = entry.getValue();
+                                            String[] keys = key.split(",",2);
+                                            lat1 = Double.parseDouble(keys[0]);
+                                            lon1 = Double.parseDouble(keys[1]);
+                                            Circle circle = mMap.addCircle(new CircleOptions()
+                                                    .center(new LatLng(lat1,lon1))
+                                                    .radius(10).strokeColor(Color.parseColor("#FF0000"))
+                                                    .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
 
-                                            pointArray = null;
-                                            pointArray = document.getData();
-                                            assert pointArray != null;
-                                            for (Map.Entry<String,Object> entry : pointArray.entrySet()){
-                                                key = entry.getKey();
-                                                speed = entry.getValue();
-                                                String[] keys = key.split(",",2);
-                                                lat1 = Double.parseDouble(keys[0]);
-                                                lon1 = Double.parseDouble(keys[1]);
-                                                Circle circle = mMap.addCircle(new CircleOptions()
-                                                        .center(new LatLng(lat1,lon1))
-                                                        .radius(10).strokeColor(Color.parseColor("#FF0000"))
-                                                        .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
+                                            circleList.put(key,circle);
+                                            double distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
+                                                    +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
-                                                circleList.put(key,circle);
-                                                double d = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
-                                                        +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
+                                            if (distance <= nearDistance){
+                                                nearDistance = distance;
+                                                maxSpeed = Integer.parseInt(String.valueOf(speed));
 
-                                                if (d <= nearDistance){
-                                                    nearDistance = d;
-                                                    maxSpeed = Integer.parseInt(String.valueOf(speed));
-
-                                                    String nDistance = String.format("%.2f",nearDistance);
-                                                    mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
-                                                    TextView speedTextView = mView.findViewById(R.id.curSpeed);
-                                                    speedTextView.setText(mSpeed);
-
-                                                }
-
-                                                if (maxSpeed < curSpeed){
-                                                    openDialog(curSpeed,maxSpeed);
-                                                }
-                                                else {
-                                                    closeDialog();
-                                                }
-
+                                                String nDistance = String.format("%.2f",nearDistance);
+                                                mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
+                                                TextView speedTextView = mView.findViewById(R.id.curSpeed);
+                                                speedTextView.setText(mSpeed);
 
                                             }
-                                            Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
+
+                                            if (maxSpeed < curSpeed){
+                                                openDialog(curSpeed,maxSpeed);
+                                            }
+                                            else {
+                                                closeDialog();
+                                            }
+
+
                                         }
+                                        Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
+
+
                                     } else {
                                         for (Circle circle : circleList.values()) {
                                             circle.remove();
@@ -493,13 +492,17 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                 if(marker != null)
                     marker.remove();
                 if(latLng != null){
-                    uploadLat = Double.parseDouble(String.valueOf(latLng.latitude).substring(0,11));
-                    uploadLon = Double.parseDouble(String.valueOf(latLng.longitude).substring(0,11));
+                    String[] stringLatitudeParts = String.valueOf(latLng.latitude).split("\\.",2);
+                    String[] stringLongitudeParts = String.valueOf(latLng.longitude).split("\\.",2);
+
+                    uploadLat = Double.parseDouble(stringLatitudeParts[0] + "." + stringLatitudeParts[1].substring(0,8));
+                    uploadLon = Double.parseDouble(stringLongitudeParts[0] + "." + stringLongitudeParts[1].substring(0,8));
                     uploadLatLng = new LatLng(uploadLat,uploadLon);
                     textViewLat.setText("Lat = "+ String.valueOf(uploadLatLng.latitude));
                     textViewLon.setText("Lon = "+ String.valueOf(uploadLatLng.longitude));
                     marker = mMap.addMarker(new MarkerOptions().position(latLng)
-                            .title(String.valueOf(latLng.latitude).substring(0,10)+","+String.valueOf(latLng.longitude).substring(0,10)));
+                            .title(stringLatitudeParts[0] + "." + stringLatitudeParts[1].substring(0,8) + ","
+                                    + stringLongitudeParts[0] + "." + stringLongitudeParts[1].substring(0,8)));
                 }
 
                 if (pointArray != null)

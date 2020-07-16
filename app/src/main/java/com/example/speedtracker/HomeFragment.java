@@ -341,7 +341,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     lat2 = location.getLatitude();
                     lon2 = location.getLongitude();
                     r = 6371000;
-                    double d;
+                    double distance;
 
                     // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
 
@@ -375,11 +375,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                             String latLon[] = key.split(",",2);
                             lat1 = Double.parseDouble(latLon[0]);
                             lon1 = Double.parseDouble(latLon[1]);
-                            d = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
+                            distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
                                     +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
-                            if (d <= nearDistance){
-                                nearDistance = d;
+                            if (distance <= nearDistance){
+                                nearDistance = distance;
                                 maxSpeed = Integer.parseInt(String.valueOf(speed));
 
                                 String nDistance = String.format("%.2f",nearDistance);
@@ -413,30 +413,29 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                                         Object speed;
                                         double nearDistance = 2000.0;
                                         int maxSpeed;
-                                        if(circleList != null){
+                                        if(circleList != null) {
                                             for (Circle circle : circleList) {
                                                 circle.remove();
                                             }
                                             circleList.clear();
-
-
-                                            pointArray = null;
-                                            pointArray = document.getData();
-                                            assert pointArray != null;
-                                            for (Map.Entry<String,Object> entry : pointArray.entrySet()){
-                                                key = entry.getKey();
-                                                speed = entry.getValue();
-                                                String latLon[] = key.split(",",2);
-                                                lat1 = Double.parseDouble(latLon[0]);
-                                                lon1 = Double.parseDouble(latLon[1]);
-                                                Circle circle = mMap.addCircle(new CircleOptions()
-                                                        .center(new LatLng(lat1,lon1))
-                                                        .radius(10).strokeColor(Color.parseColor("#FF0000"))
-                                                        .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
-                                                circleList.add(circle);
-                                            }
-                                            Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
                                         }
+
+                                        pointArray = null;
+                                        pointArray = document.getData();
+                                        assert pointArray != null;
+                                        for (Map.Entry<String,Object> entry : pointArray.entrySet()){
+                                            key = entry.getKey();
+                                            speed = entry.getValue();
+                                            String latLon[] = key.split(",",2);
+                                            lat1 = Double.parseDouble(latLon[0]);
+                                            lon1 = Double.parseDouble(latLon[1]);
+                                            Circle circle = mMap.addCircle(new CircleOptions()
+                                                    .center(new LatLng(lat1,lon1))
+                                                    .radius(10).strokeColor(Color.parseColor("#FF0000"))
+                                                    .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
+                                            circleList.add(circle);
+                                        }
+                                        Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
                                     } else {
                                         for (Circle circle : circleList) {
                                             circle.remove();
