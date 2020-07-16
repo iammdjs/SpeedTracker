@@ -215,6 +215,12 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                             circle.remove();
                             circleList.remove(field);
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(),"Delete point failed",Toast.LENGTH_SHORT).show();
+                            Log.d("myTag", "onFailure: " + e.toString());
+                        }
                     });
 
                 }
@@ -255,8 +261,8 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                         documentReference.set(point, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(getContext(),"onSuccess: user Profile is created for",Toast.LENGTH_SHORT).show();
-                                Log.d("myTag","onSuccess: user Profile is created for"+field);
+                                Toast.makeText(getContext(),"Add or update point success",Toast.LENGTH_SHORT).show();
+                                Log.d("myTag","Add or update point success for"+field);
 
                                 if(circleList.get(field) == null){
                                     Circle circle = mMap.addCircle(new CircleOptions()
@@ -274,7 +280,7 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(),"onFailure: user Profile is not created",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Add or update point failed",Toast.LENGTH_SHORT).show();
                                 Log.d("myTag", "onFailure: " + e.toString());
                             }
                         });
