@@ -5,7 +5,7 @@
     <string name="button1">+</string>
     <string name="button2">-</string>
     <string name="speed">Speed = __km/h\nMaxspeed = 20km/h\nDistance = __m</string>
-    <string name="speedValue">Speed</string>
+    <string name="maxSpeedValue">Max Speed</string>
     <string name="log_out">Log Out</string>
     <string name="welcome_to_speedtracker">Welcome to SpeedTracker</string>
     <string name="email">Email</string>

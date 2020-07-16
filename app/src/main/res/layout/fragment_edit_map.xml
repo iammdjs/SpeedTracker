@@ -143,7 +143,7 @@
         android:layout_marginTop="12dp"
         android:background="@color/color1"
         android:ems="10"
-        android:hint="@string/speedValue"
+        android:hint="@string/maxSpeedValue"
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:padding="10dp"
