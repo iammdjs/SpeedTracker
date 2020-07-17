@@ -78,6 +78,7 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
     private String mSpeed;
     //TextView speedTextView = findViewById(R.id.curSpeed);
     private double lat1,lon1,lat2,lon2,r = 6371000;
+    private int maxSpeed = 20;
     private String path1 = null,path2 = null;
     private Map<String, Object> pointArray = null;
     private Map<String, Object> pointArray1 = null;
@@ -355,7 +356,6 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                         String key;
                         Object speed;
                         double nearDistance = 2000.0;
-                        int maxSpeed = 20;
 
                         for (Map.Entry<String,Object> entry : pointArray.entrySet()){
                             key = entry.getKey();
@@ -368,7 +368,10 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
 
                             if (distance <= nearDistance){
                                 nearDistance = distance;
-                                maxSpeed = Integer.parseInt(String.valueOf(speed));
+
+                                if (distance <= 10){
+                                    maxSpeed = Integer.parseInt(String.valueOf(speed));
+                                }
 
                                 String nDistance = String.format("%.2f",nearDistance);
                                 mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
@@ -398,8 +401,8 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                                     if (document.exists()) {
                                         String key = "";
                                         Object speed;
-                                        double nearDistance = 2000.0;
-                                        int maxSpeed = 20;
+//                                        double nearDistance = 2000.0;
+//                                        int maxSpeed = 20;
                                         if(circleList != null) {
                                             for (Circle circle : circleList.values()) {
                                                 circle.remove();
@@ -422,30 +425,34 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                                                     .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
 
                                             circleList.put(key,circle);
-                                            double distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
-                                                    +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
-                                            if (distance <= nearDistance){
-                                                nearDistance = distance;
-                                                maxSpeed = Integer.parseInt(String.valueOf(speed));
-
-                                                String nDistance = String.format("%.2f",nearDistance);
-                                                mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
-                                                TextView speedTextView = mView.findViewById(R.id.curSpeed);
-                                                speedTextView.setText(mSpeed);
-
-                                            }
-
-                                            if (maxSpeed < curSpeed){
-                                                openDialog(curSpeed,maxSpeed);
-                                            }
-                                            else {
-                                                closeDialog();
-                                            }
+//                                            double distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
+//                                                    +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
+//
+//                                            if (distance <= nearDistance){
+//                                                nearDistance = distance;
+//
+//                                                if (distance <= 10){
+//                                                    maxSpeed = Integer.parseInt(String.valueOf(speed));
+//                                                }
+//
+//                                                String nDistance = String.format("%.2f",nearDistance);
+//                                                mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
+//                                                TextView speedTextView = mView.findViewById(R.id.curSpeed);
+//                                                speedTextView.setText(mSpeed);
+//
+//                                            }
+//
+//                                            if (maxSpeed < curSpeed){
+//                                                openDialog(curSpeed,maxSpeed);
+//                                            }
+//                                            else {
+//                                                closeDialog();
+//                                            }
 
 
                                         }
-                                        Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
 
 
                                     } else {

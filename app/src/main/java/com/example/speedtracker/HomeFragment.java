@@ -101,6 +101,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private String mSpeed;
     //TextView speedTextView = findViewById(R.id.curSpeed);
     private double lat1,lon1,lat2,lon2,r = 6371000;
+    private int maxSpeed = 20;
     private String path1 = null,path2 = null;
     private Map<String, Object> pointArray = null;
 
@@ -311,7 +312,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        takeScreenShot();
+//        takeScreenShot();
 //        mMap.setMappointArray(GoogleMap.MAP_pointArray_SATELLITE);
 
 //        LocationListener locationListener;
@@ -367,7 +368,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         String key;
                         Object speed;
                         double nearDistance = 2000.0;
-                        int maxSpeed = 20;
 
                         for (Map.Entry<String,Object> entry : pointArray.entrySet()){
                             key = entry.getKey();
@@ -380,7 +380,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
                             if (distance <= nearDistance){
                                 nearDistance = distance;
-                                maxSpeed = Integer.parseInt(String.valueOf(speed));
+
+                                if (distance <= 10){
+                                    maxSpeed = Integer.parseInt(String.valueOf(speed));
+                                }
 
                                 String nDistance = String.format("%.2f",nearDistance);
 
@@ -435,7 +438,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                                                     .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
                                             circleList.add(circle);
                                         }
-                                        Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
                                     } else {
                                         for (Circle circle : circleList) {
                                             circle.remove();
