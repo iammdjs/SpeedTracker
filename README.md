@@ -1,4 +1,4 @@
-# Speed Tracker (Android Application) Github Repository
+# Speed Tracker (Android Application)
 # Guide: Arijit Bhattacharya, Assistant Professor & HOD, Computer Science Dept., Gour Mahavidyalaya
 # • Using Java programming language, Firebase database and Google Maps API.
 # • This application can track the speed of any vehicle.
