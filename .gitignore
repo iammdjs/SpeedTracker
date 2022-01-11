@@ -10,7 +10,7 @@
 .DS_Store
 /build
 /captures
+/app/src/debug/res/values/google_maps_api_key.xml
 .externalNativeBuild
 .cxx
-/app/src/debug/res/values/google_maps_api_key.xml
 /gradle/wrapper/gradle-wrapper.jar
