@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/SpeedTracker/app/src/debug/res/values/google_maps_api.xml
