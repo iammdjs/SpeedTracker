@@ -156,9 +156,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             Log.e("DB", "PERMISSION GRANTED");
         }
 
-//        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         ImageView currentLocation = mView.findViewById(R.id.cur_loc_btn);
         currentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,126 +190,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-//        Button screenShotButton = mView.findViewById(R.id.takeScreenShot);
-//        screenShotButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                takeScreenShot();
-//            }
-//        });
-
         return mView;
-    }
-
-    public void takeScreenShot(){
-
-        /*getActivity().getWindow().getDecorView().findViewById(android.R.id.content).setDrawingCacheEnabled(true);
-        Bitmap backBitmap = getActivity().getWindow().getDecorView().findViewById(android.R.id.content).getDrawingCache();
-
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                // Make a snapshot when map's done loading
-                mMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
-                    @Override
-                    public void onSnapshotReady(Bitmap snapshot) {
-                        //bitmapMapsattelite = null;
-                        //bitmapMapsattelite = bitmap;
-                        //imageView.setImageBitmap(bitmap);
-                        //bitmapMapsattelite = null;
-
-
-                        bitmapMapsattelite = Bitmap.createBitmap(
-                                backBitmap.getWidth(), backBitmap.getHeight(),
-                                backBitmap.getConfig());
-                        Canvas canvas = new Canvas(bitmapMapsattelite);
-                        canvas.drawBitmap(snapshot, new Matrix(), null);
-                        canvas.drawBitmap(backBitmap, 0, 0, null);
-                    }
-
-                });
-            }
-        });*/
-
-
-        final GoogleMap.SnapshotReadyCallback snapReadyCallback = new GoogleMap.SnapshotReadyCallback() {
-            Bitmap bitmap;
-            @Override
-            public void onSnapshotReady(Bitmap snapshot) {
-                bitmap = snapshot;
-                try {
-                    //do something with your snapshot
-
-//                    getActivity().getWindow().getDecorView().findViewById(android.R.id.content).setDrawingCacheEnabled(true);
-//                    Bitmap backBitmap = getActivity().getWindow().getDecorView().findViewById(android.R.id.content).getDrawingCache();
-                    Bitmap backBitmap = getBitmap();
-
-                    bitmapMapsattelite = Bitmap.createBitmap(
-                            backBitmap.getWidth(), backBitmap.getHeight(),
-                            backBitmap.getConfig());
-                    Canvas canvas = new Canvas(bitmapMapsattelite);
-                    canvas.drawBitmap(snapshot, new Matrix(), null);
-                    canvas.drawBitmap(backBitmap, 0, 0, null);
-                    //getActivity().getWindow().getDecorView().findViewById(android.R.id.content).setDrawingCacheEnabled(false);
-                    backBitmap = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        GoogleMap.OnMapLoadedCallback mapLoadedCallback = new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                mMap.snapshot(snapReadyCallback);
-            }
-        };
-        mMap.setOnMapLoadedCallback(mapLoadedCallback);
-
-
-        if (bitmapMapsattelite != null) {
-
-            Date date = new Date();
-            CharSequence now = android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", date);
-            CharSequence charSequence = android.text.format.DateFormat.format("ss",date);
-
-            String fileName = Environment.getExternalStorageDirectory() + "/Speed Tracker/J-" + now + ".jpg";
-
-            File file = new File(fileName);
-//        if (!dir.exists())
-//            dir.mkdirs();
-//        File file = new File(saveFilePath.getAbsolutePath(), fileName);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-            }
-            try {
-                FileOutputStream fOut = new FileOutputStream(file);
-                bitmapMapsattelite.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
-                fOut.flush();
-                fOut.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            Toast.makeText(getActivity(),charSequence + "take screenshot successful", Toast.LENGTH_SHORT).show();
-
-            bitmapMapsattelite = null;
-        }
-        else
-            Toast.makeText(getActivity(),"take screenshot failed", Toast.LENGTH_SHORT).show();
-    }
-    public Bitmap getBitmap(){
-        getActivity().getWindow().getDecorView().findViewById(android.R.id.content).setDrawingCacheEnabled(true);
-        Bitmap backBitmap = getActivity().getWindow().getDecorView().findViewById(android.R.id.content).getDrawingCache();
-        getActivity().getWindow().getDecorView().findViewById(android.R.id.content).setDrawingCacheEnabled(false);
-        return backBitmap;
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-//        takeScreenShot();
 //        mMap.setMappointArray(GoogleMap.MAP_pointArray_SATELLITE);
 
 //        LocationListener locationListener;
@@ -344,20 +228,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     r = 6371000;
                     double distance;
 
-                    // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
-
-//                    double d = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
-//                            +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
-//
-//                    if(d <= 10){
-//                        mSpeed = "Speed = "+curSpeed+" km/h inside \n"+lat2+","+lon2;
-//                        speedTextView.setText(mSpeed);
-//                    }
-//                    else {
-//                        mSpeed = "Speed = "+curSpeed+" km/h outside \n"+lat2+","+lon2;
-//                        speedTextView.setText(mSpeed);
-//                    }
-
 
                     String[] stringLatitudeParts = String.valueOf(location.getLatitude()).split("\\.",2);
                     String[] stringLongitudeParts = String.valueOf(location.getLongitude()).split("\\.",2);
@@ -375,6 +245,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                             String latLon[] = key.split(",",2);
                             lat1 = Double.parseDouble(latLon[0]);
                             lon1 = Double.parseDouble(latLon[1]);
+
+                            // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
                             distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
                                     +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
@@ -444,7 +316,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                                             circle.remove();
                                         }
                                         circleList.clear();
-                                        Toast.makeText(getContext(),"Error getting documents: "+circleList.size(),Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getContext(),"Error getting documents: "+circleList.size(),Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     Toast.makeText(getContext(),"get failed with ",Toast.LENGTH_SHORT).show();

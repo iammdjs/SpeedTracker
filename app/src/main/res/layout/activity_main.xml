@@ -7,20 +7,6 @@
     android:background="@color/color1"
     tools:context=".MainActivity">
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView"-->
-    <!--        android:layout_width="355dp"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:layout_marginTop="56dp"-->
-    <!--        android:background="#FA141313"-->
-    <!--        android:text="@string/welcome_to_speedtracker"-->
-    <!--        android:textColor="#F80DEE15"-->
-    <!--        android:textSize="30sp"-->
-    <!--        android:textStyle="normal"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"

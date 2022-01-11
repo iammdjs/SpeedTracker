@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Logged in Successful", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(getApplicationContext(),MapsActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

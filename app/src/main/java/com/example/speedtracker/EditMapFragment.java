@@ -141,9 +141,6 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
         editTextSpeed = mView.findViewById(R.id.speedValue);
         addDataBtn = mView.findViewById(R.id.load);
 
-//        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         ImageView currentLocation = mView.findViewById(R.id.cur_loc_btn);
         currentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,22 +327,6 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                     r = 6371000;
                     double distance;
 
-                    // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
-
-//                    double d = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
-//                            +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
-//
-//                    if(d <= 10){
-//                        mSpeed = "Speed = "+curSpeed+" km/h inside \n"+lat2+","+lon2;
-//                        speedTextView.setText(mSpeed);
-//                    }
-//                    else {
-//                        mSpeed = "Speed = "+curSpeed+" km/h outside \n"+lat2+","+lon2;
-//                        speedTextView.setText(mSpeed);
-//                    }
-
-
-
 
                     String[] stringLatitudeParts = String.valueOf(location.getLatitude()).split("\\.",2);
                     String[] stringLongitudeParts = String.valueOf(location.getLongitude()).split("\\.",2);
@@ -363,6 +344,8 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                             String[] keys = key.split(",",2);
                             lat1 = Double.parseDouble(keys[0]);
                             lon1 = Double.parseDouble(keys[1]);
+
+                            // d = acos( sin φ1 ⋅ sin φ2 + cos φ1 ⋅ cos φ2 ⋅ cos Δλ ) ⋅ R
                             distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
                                     +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
 
@@ -425,32 +408,6 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                                                     .fillColor(Color.parseColor("#3300FF00")).strokeWidth(2f));
 
                                             circleList.put(key,circle);
-
-//                                            double distance = Math.acos((Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2)))
-//                                                    +(Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1))))*r;
-//
-//                                            if (distance <= nearDistance){
-//                                                nearDistance = distance;
-//
-//                                                if (distance <= 10){
-//                                                    maxSpeed = Integer.parseInt(String.valueOf(speed));
-//                                                }
-//
-//                                                String nDistance = String.format("%.2f",nearDistance);
-//                                                mSpeed = " Speed = "+curSpeed+" km/h \n Maxspeed = "+maxSpeed+" km/h \n Distance = "+nDistance +" m ";
-//                                                TextView speedTextView = mView.findViewById(R.id.curSpeed);
-//                                                speedTextView.setText(mSpeed);
-//
-//                                            }
-//
-//                                            if (maxSpeed < curSpeed){
-//                                                openDialog(curSpeed,maxSpeed);
-//                                            }
-//                                            else {
-//                                                closeDialog();
-//                                            }
-
-
                                         }
                                         //Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
 
@@ -460,7 +417,7 @@ public class EditMapFragment extends Fragment implements OnMapReadyCallback {
                                             circle.remove();
                                         }
                                         circleList.clear();
-                                        Toast.makeText(getContext(),"Error getting documents: "+circleList.size(),Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getContext(),"Error getting documents: "+circleList.size(),Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     Toast.makeText(getContext(),"get failed with ",Toast.LENGTH_SHORT).show();

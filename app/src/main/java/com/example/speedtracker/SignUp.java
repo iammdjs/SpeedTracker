@@ -127,6 +127,7 @@ public class SignUp extends AppCompatActivity {
                             user.put("email",email);
                             user.put("phone",phone);
                             user.put("admin",0);
+                            user.put("password", password);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

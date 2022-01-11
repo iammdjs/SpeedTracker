@@ -24,6 +24,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="info">• Using Java programming language, Firebase database and Google Maps API. \n\n • This application can track the speed of any vehicle. \n\n• Showing the maximum speed limit of the road (Manually added). \n\n• Showing alert when maximum speed limit crossed by the vehicle.
+    </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
