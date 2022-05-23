@@ -8,4 +8,4 @@
 # Application Report link :- https://bit.ly/3zVu5re
 
 # Application apk download link :- https://bit.ly/33afMmr
-# Application testing video link :- https://bit.ly/3K2WXm0
+# Application testing YouTube video link :- https://bit.ly/3K2WXm0
